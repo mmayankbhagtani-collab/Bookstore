@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Books</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-[#f6f3ed] text-[#17202a]">
+
+    <%- include('includes/nav.ejs') %>
+
+    <section class="bg-[#101820] px-4 py-7 text-center text-white">
+
+        <p class="text-sm font-bold uppercase tracking-[4px] text-[#d8b77a]">
+            Our Collection
+        </p>
+
+        <h1 class="mt-1 text-3xl font-bold md:text-4xl">
+            Discover Your Next
+            <span class="text-[#d8b77a]">Favourite Book</span>
+        </h1>
+
+        <p class="mx-auto mt-1 max-w-2xl text-white/55">
+            Explore our collection of stories, knowledge and ideas selected for every kind of reader.
+        </p>
+
+    </section>
+
+    <% if(isAdmin) { %>
+
+        <section class="border-b border-[#e5dfd3] bg-white px-6 py-5">
+
+            <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-3">
+
+                <a href="/books/new"
+                    class="rounded-full bg-[#17202a] px-6 py-2.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                    + Add New Book
+                </a>
+
+            </div>
+
+        </section>
+
+    <% } %>
+
+    <main class="mx-auto max-w-6xl px-6 py-14">
+
+        <div class="mb-10 flex items-end justify-between">
+
+            <div>
+
+                <p class="text-sm font-bold uppercase tracking-[3px] text-[#a47c43]">
+                    The Collection
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-[#17202a]">
+                    Available Books
+                </h2>
+
+            </div>
+
+            <p class="hidden text-sm text-gray-500 sm:block">
+                Explore • Read • Grow
+            </p>
+
+        </div>
+
+
+        <div class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+
+            <% books.forEach(book => { %>
+
+                <div class="group relative overflow-hidden rounded-3xl border border-[#e4ddd0] bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
+                     <div class="flex h-64 items-center justify-center overflow-hidden bg-[#f0e6d3]">
+
+                        <img
+                            src="<%= book.image || 'https://placehold.co/400x500/f0e6d3/17202a?text=Book+Cover' %>"
+                            alt="<%= book.title %>"
+                            class="h-full w-full object-contain p-4 transition duration-500 group-hover:scale-105"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x500/f0e6d3/17202a?text=Book+Cover';"
+                        >
+
+                    </div>
+
+                    <div class="p-4">
+
+                        <div class="mb-6 flex items-start justify-between">
+
+                            <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f0e6d3] text-2xl transition duration-300 group-hover:bg-[#17202a] group-hover:text-[#d8b77a]">
+                                📖
+                            </div>
+
+                            <span class="rounded-full bg-[#f6f3ed] px-3 py-2 text-xs font-semibold text-[#a47c43]">
+                                Book
+                            </span>
+
+                        </div>
+
+                        <h2 class="min-h-[25px] text-xl font-bold leading-4 text-[#17202a] transition group-hover:text-[#a47c43]">
+                            <%= book.title %>
+                        </h2>
+
+
+                        <div class="mt-2 space-y-2">
+
+                            <div class="flex items-center justify-between border-b border-[#eee9df] pb-2">
+
+                                <span class="text-sm text-gray-400">
+                                    Author
+                                </span>
+
+                                <span class="max-w-[60%] text-right text-sm font-semibold text-[#17202a]">
+                                    <%= book.author %>
+                                </span>
+
+                            </div>
+
+                            <div class="flex items-center justify-between border-b border-[#eee9df] pb-1">
+
+                                <span class="text-sm text-gray-400">
+                                    Price
+                                </span>
+
+                                <span class="text-lg font-bold text-[#a47c43]">
+                                    ₹<%= book.price %>
+                                </span>
+
+                            </div>
+
+                            <div class="flex items-center justify-between">
+
+                                <span class="text-sm text-gray-400">
+                                    Category
+                                </span>
+
+                                <span class="max-w-[60%] rounded-full bg-[#17202a] px-3 py-1 text-right text-xs font-medium text-[#d8b77a]">
+                                    <%= book.category %>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <% if(isAdmin) { %>
+
+                            <div class="mt-1 flex gap-2 border-t border-[#eee9df] pt-3">
+
+                                <form action="/books/delete/<%=book._id %>" method="POST" class="flex-1">
+
+                                    <button type="submit"
+                                        class="w-full rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 transition duration-300 hover:bg-red-500 hover:text-white">
+                                        Delete
+                                    </button>
+
+                                </form>
+
+
+                                <form action="/books/edit/<%=book._id %>" method="GET" class="flex-1">
+
+                                    <button type="submit"
+                                        class="w-full rounded-xl bg-[#17202a] px-3 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-[#d8b77a] hover:text-[#101820]">
+                                        Edit
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        <% } %>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+    <section class="px-6 pb-10">
+
+        <div class="mx-auto max-w-4xl rounded-[2rem] bg-[#17202a] px-8 py-12 text-center text-white shadow-xl">
+
+            <p class="text-sm font-bold uppercase tracking-[3px] text-[#d8b77a]">
+                Keep Reading
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold md:text-3xl">
+                Every Book Has a Story to Tell.
+            </h2>
+
+            <p class="mx-auto mt-3 max-w-xl text-sm leading-4 text-white/60">
+                Take your time, explore our collection and find
+                something worth adding to your reading list.
+            </p>
+
+            <a href="/categories"
+                class="mt-3 inline-block rounded-full bg-[#d8b77a] px-6 py-2 font-bold text-[#101820] transition duration-300 hover:-translate-y-1 hover:bg-[#f0d59e] hover:shadow-lg">
+                Explore Categories →
+            </a>
+
+        </div>
+
+    </section>
+
+     <footer class="bg-[#101820] px-6 py-5 text-white md:px-10">
+        <div class="mx-auto grid max-w-6xl gap-8 text-center md:grid-cols-2 md:items-center md:text-left">
+
+            <div>
+                <h3 class="text-2xl font-bold">
+                    The <span class="font-serif italic text-[#d8b77a]">Book Store</span>
+                </h3>
+
+                <p class="mt-4 max-w-md text-lg leading-6 text-white/45">
+                    A place where stories come alive, knowledge grows
+                    and every reader can find something special.
+                </p>
+            </div>
+
+            <div class="md:text-right">
+                <p class="text-lg font-bold text-[#d8b77a]">
+                    Read. Learn. Grow.
+                </p>
+
+                <p class="mt-2 text-lg text-white/45">
+                    © The Book Store
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

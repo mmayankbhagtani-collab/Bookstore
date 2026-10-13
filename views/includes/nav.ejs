@@ -1,0 +1,80 @@
+<nav class="sticky top-0 z-50 border-b border-white/10 bg-[#101820]/95 px-6 py-4 text-white shadow-xl backdrop-blur-md">
+
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+
+        <a href="/"
+            class="group flex items-center gap-2 text-xl font-bold tracking-wide transition duration-300 hover:text-[#d8b77a]">
+
+            <span class="text-[#d8b77a] transition duration-300 group-hover:rotate-12">
+                📚
+            </span>
+
+            <span>
+                The Book Store
+            </span>
+
+        </a>
+
+
+        <div class="flex items-center gap-2 md:gap-7">
+
+            <a href="/"
+                class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                Home
+            </a>
+
+            <a href="/books"
+                class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                Books
+            </a>
+
+            <a href="/categories"
+                class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                Categories
+            </a>
+
+            <a href="/about"
+                class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                About Us
+            </a>
+
+            <% if (!isAdmin) { %>
+                <a href="/contact"
+                    class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                    Contact Us
+                </a>
+            <% } %>
+
+            <% if (!isAdmin) { %>
+                <a href="/cart"
+                    class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                    🛒 My Cart
+                </a>
+            <% } %>
+
+            <% if (isAdmin) { %>
+                <a href="/admin/contacts"
+                    aria-label="Contact messages"
+                    class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-bold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                    <span class="inline-block scale-160">✉️</span>
+                </a>
+                <a href="/admin/orders"
+                    class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                    Orders
+                </a>
+                <a href="/admin/logout"
+                    class="rounded-full border border-red-300/50 px-5 py-2 text-sm font-semibold text-red-400 transition duration-300 hover:-translate-y-0.5 hover:bg-red-500 hover:text-white hover:shadow-lg">
+                    Logout
+                </a>
+            <% } else { %>
+                <a href="/admin/login"
+                    class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
+                    Admin Panel
+                </a>
+            <% } %>
+
+        </div>
+
+    </div>
+
+</nav>

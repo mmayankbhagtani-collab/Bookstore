@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>Admin Login</title>
+</head>
+
+<body class="min-h-screen bg-[#f6f3ed] text-[#17202a]">
+
+    <%- include('includes/nav.ejs') %>
+
+    <main class="relative flex min-h-[calc(100vh-72px)] items-center justify-center overflow-hidden px-6 py-16">
+
+        <div class="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-[#d8b77a]/10 blur-3xl"></div>
+        <div class="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-[#17202a]/10 blur-3xl"></div>
+
+
+        <div class="relative w-full max-w-md">
+
+            <div class="overflow-hidden rounded-[2rem] border border-[#e4ddd0] bg-white shadow-2xl">
+
+                <div class="p-8 md:p-10">
+
+                    <div class="mb-8 text-center">
+
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#17202a] text-2xl text-[#d8b77a] shadow-lg">
+                            🔐
+                        </div>
+
+                        <p class="mt-6 text-xs font-bold uppercase tracking-[4px] text-[#a47c43]">
+                            Admin Panel
+                        </p>
+
+                        <h1 class="mt-2 text-3xl font-bold text-[#17202a]">
+                            Welcome Back
+                        </h1>
+
+                        <p class="mt-2 text-sm leading-6 text-gray-500">
+                            Sign in to manage your bookstore collection.
+                        </p>
+
+                    </div>
+
+                    <form action="/admin/login" method="POST" autocomplete="on">
+
+                        <div class="mb-5">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#17202a]">
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                name="username"
+                                autocomplete="username"
+                                required
+                                placeholder="Enter your username"
+                                class="w-full rounded-xl border border-[#ded7ca] bg-[#faf8f4] px-4 py-3 text-sm text-[#17202a] outline-none transition duration-300 placeholder:text-gray-400 focus:border-[#d8b77a] focus:bg-white focus:ring-4 focus:ring-[#d8b77a]/10"
+                            >
+
+                        </div>
+
+                        <div class="mb-7">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#17202a]">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                name="password"
+                                autocomplete="current-password"
+                                required
+                                placeholder="Enter your password"
+                                class="w-full rounded-xl border border-[#ded7ca] bg-[#faf8f4] px-4 py-3 text-sm text-[#17202a] outline-none transition duration-300 placeholder:text-gray-400 focus:border-[#d8b77a] focus:bg-white focus:ring-4 focus:ring-[#d8b77a]/10"
+                            >
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full rounded-xl bg-[#17202a] py-2.5 font-bold text-white shadow-md transition duration-300 hover:-translate-y-1 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-xl">
+
+                            Login to Admin Panel →
+
+                        </button>
+
+                    </form>
+
+                    <div class="mt-7 border-t border-[#eee9df] pt-6 text-center">
+
+                        <p class="text-xs text-gray-400">
+                            The Book Store • Admin Access
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+     <footer class="bg-[#101820] px-6 py-5 text-white md:px-10">
+        <div class="mx-auto grid max-w-6xl gap-8 text-center md:grid-cols-2 md:items-center md:text-left">
+
+            <div>
+                <h3 class="text-2xl font-bold">
+                    The <span class="font-serif italic text-[#d8b77a]">Book Store</span>
+                </h3>
+
+                <p class="mt-4 max-w-md text-lg leading-6 text-white/45">
+                    A place where stories come alive, knowledge grows
+                    and every reader can find something special.
+                </p>
+            </div>
+
+            <div class="md:text-right">
+                <p class="text-lg font-bold text-[#d8b77a]">
+                    Read. Learn. Grow.
+                </p>
+
+                <p class="mt-2 text-lg text-white/45">
+                    © The Book Store
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+
+</body>
+</html>

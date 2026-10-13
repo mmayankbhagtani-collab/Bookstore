@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | The Book Store</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-[#f6f3ed] text-[#17202a]">
+
+*<*%- include('includes/nav.ejs') %>
+
+    <section class="bg-[#101820] px-4 py-7 text-center text-white">
+        <p class="text-sm font-bold uppercase tracking-[4px] text-[#d8b77a]">
+            Complete Your Purchase
+        </p>
+        <h1 class="mt-1 text-3xl font-bold">
+            Customer <span class="text-[#d8b77a]">Details</span>
+        </h1>
+        <p class="mt-1 text-white/60">Fill in your delivery information below.</p>
+    </section>
+
+    <main class="mx-auto max-w-2xl px-5 py-5">
+        <form id="checkoutForm" action="/checkout" method="POST"
+            class="space-y-3 rounded-3xl border border-[#e4ddd0] bg-white p-4 shadow-lg sm:p-9">
+
+            <div>
+                <label for="name" class="mb-2 block font-semibold">Full Name</label>
+                <input id="name" name="name" type="text" required maxlength="100"
+                    autocomplete="name" placeholder="Enter your full name"
+                    class="w-full rounded-xl border border-[#ded7ca] px-4 py-3 outline-none focus:border-[#a47c43]">
+            </div>
+
+            <div>
+                <label for="email" class="mb-2 block font-semibold">Email Address</label>
+                <input id="email" name="email" type="email" required maxlength="254"
+                    autocomplete="email" placeholder="Enter your email address"
+                    class="w-full rounded-xl border border-[#ded7ca] px-4 py-3 outline-none focus:border-[#a47c43]">
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2">
+                <div>
+                    <label for="phone" class="mb-2 block font-semibold">Phone Number</label>
+                    <input id="phone" name="phone" type="tel" required
+                        pattern="[0-9]{10}" maxlength="10" autocomplete="tel"
+                        placeholder="10-digit mobile number"
+                        class="w-full rounded-xl border border-[#ded7ca] px-4 py-3 outline-none focus:border-[#a47c43]">
+                </div>
+
+                <div>
+                    <label for="pincode" class="mb-2 block font-semibold">PIN Code</label>
+                    <input id="pincode" name="pincode" type="text" required
+                        pattern="[0-9]{6}" maxlength="6" autocomplete="postal-code"
+                        placeholder="6-digit PIN code"
+                        class="w-full rounded-xl border border-[#ded7ca] px-4 py-3 outline-none focus:border-[#a47c43]">
+                </div>
+            </div>
+
+            <div>
+                <label for="address" class="mb-2 block font-semibold">Full Address</label>
+                <textarea id="address" name="address" required maxlength="1000"
+                    rows="3" autocomplete="street-address"
+                    placeholder="House number, street, area..."
+                    class="w-full rounded-xl border border-[#ded7ca] px-4 py-3 outline-none focus:border-[#a47c43]"></textarea>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2">
+                <div>
+                    <label for="city" class="mb-2 block font-semibold">City</label>
+                    <input id="city" name="city" type="text" required maxlength="100"
+                        autocomplete="address-level2" placeholder="Enter city"
+                        class="w-full rounded-xl border border-[#ded7ca] px-4 py-3 outline-none focus:border-[#a47c43]">
+                </div>
+
+                <div>
+                    <label for="state" class="mb-2 block font-semibold">State</label>
+                    <input id="state" name="state" type="text" required maxlength="100"
+                        autocomplete="address-level1" placeholder="Enter state"
+                        class="w-full rounded-xl border border-[#ded7ca] px-4 py-3 outline-none focus:border-[#a47c43]">
+                </div>
+            </div>
+
+            <div>
+                <label for="payment" class="mb-2 block font-semibold">Payment Method</label>
+                <select id="payment" name="payment" required
+                    class="w-full rounded-xl border border-[#ded7ca] bg-white px-4 py-3 outline-none focus:border-[#a47c43]">
+                    <option value="">Select payment method</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                    <option value="UPI">UPI</option>
+                    <!-- <option value="Debit/Credit Card">Debit/Credit Card</option> -->
+                </select>
+                <p class="mt-2 text-xs text-gray-500">
+                    Online payment options require a payment gateway to process payments.
+                </p>
+            </div>
+
+            <input type="hidden" id="cartData" name="cartData">
+            <input type="hidden" id="orderId" name="orderId" hidden>
+
+            <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                <a href="/cart"
+                    class="rounded-xl border border-[#ded7ca] px-5 py-3 text-center font-semibold hover:bg-[#f6f3ed]">
+                    Back to Cart
+                </a>
+
+                <button type="submit"
+                    class="flex-1 rounded-xl bg-[#17202a] px-5 py-3 font-bold text-white transition hover:bg-[#d8b77a] hover:text-[#101820]">
+                    Proceed to Order →
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="bg-[#101820] px-6 py-6 text-center text-white">
+        <p class="font-bold">The <span class="text-[#d8b77a]">Book Store</span></p>
+        <p class="mt-2 text-sm text-white/50">Read. Learn. Grow.</p>
+    </footer>
+
+<script>
+    document.getElementById('checkoutForm').addEventListener('submit', function (event) {
+        let cart;
+
+        try {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (error) {
+            cart = [];
+        }
+
+        if (!Array.isArray(cart) || cart.length === 0) {
+            event.preventDefault();
+            alert('Your cart is empty. Please add a book before checkout.');
+            return;
+        }
+
+        const cartData = cart.map(book => ({
+            title: String(book.title || 'Book').slice(0, 200),
+            author: String(book.author || 'Unknown').slice(0, 100),
+            price: Number(book.price),
+            quantity: Math.max(1, Math.min(100, Number(book.quantity) || 1))
+        }));
+
+        if (cartData.some(book => !Number.isFinite(book.price) || book.price < 0)) {
+            event.preventDefault();
+            alert('Invalid book price. Please check your cart.');
+            return;
+        }
+
+        document.getElementById('cartData').value = JSON.stringify(cartData);
+
+        const payment = document.getElementById('payment').value;
+
+        if (!payment) {
+            event.preventDefault();
+            alert('Please select a payment method.');
+            return;
+        }
+
+        if (payment === 'UPI') {
+            event.preventDefault();
+            this.action = '/upi-payment';
+            this.submit();
+        } else if (payment === 'Cash on Delivery') {
+            localStorage.removeItem('cart');
+        }
+    });
+</script>
+</body>
+</html>

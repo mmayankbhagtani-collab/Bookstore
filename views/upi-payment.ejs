@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment | The Book Store</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-[#f6f3ed] text-[#17202a]">
+
+    <%- include('includes/nav.ejs') %>
+
+    <main class="max-w-1xl mx-auto px-2 py-5.5">
+        <div class="bg-white rounded-3xl shadow-lg p-4 text-center">
+
+            <p class="text-sm uppercase tracking-[3px] text-[#a47c43] mb-3">
+                Secure Checkout
+            </p>
+
+            <h1 class="text-2xl font-bold mb-3">Pay Using UPI</h1>
+
+            <p class="text-gray-500 mb-4">
+                Scan the QR code using your UPI payment app.
+            </p>
+
+            <div class="inline-block bg-white border rounded-2xl p-2 mb-2">
+                <img
+                    id="upiQr"
+                    alt="UPI Payment QR Code"
+                    width="280"
+                    height="280"
+                    class="w-40 h-40 mx-auto object-contain"
+                >
+
+                <p id="qrError" class="hidden text-red-600 text-sm mt-2">
+                    QR code could not load. Please check your internet connection.
+                </p>
+            </div>
+
+            <p class="text-gray-500">Total Amount</p>
+
+            <h2 class="text-2xl font-bold text-[#a47c43] my-2">
+                ₹<%= Number(totalAmount).toFixed(2) %>
+            </h2>
+
+            <p class="text-gray-500 mt-5 mb-2">UPI ID</p>
+
+            <div class="flex justify-center items-center gap-2 flex-wrap">
+                <span id="upiId" class="font-semibold"><%= upiId %></span>
+
+                <button
+                    type="button"
+                    onclick="copyUpi()"
+                    class="bg-[#101820] hover:bg-[#a47c43] text-white px-3 py-1 rounded-lg transition">
+                    Copy UPI ID
+                </button>
+            </div>
+
+            <p class="text-sm text-gray-500 mt-3">
+                Open your UPI app, scan the QR code, and confirm the payment
+                details before paying.
+            </p>
+
+            <form id="confirmPaymentForm" action="/checkout" method="POST" class="mt-8">
+                <input type="hidden" name="name" value="<%= customer.name %>">
+                <input type="hidden" name="email" value="<%= customer.email %>">
+                <input type="hidden" name="phone" value="<%= customer.phone %>">
+                <input type="hidden" name="pincode" value="<%= customer.pincode %>">
+                <input type="hidden" name="address" value="<%= customer.address %>">
+                <input type="hidden" name="city" value="<%= customer.city %>">
+                <input type="hidden" name="state" value="<%= customer.state %>">
+                <input type="hidden" name="payment" value="UPI">
+                <textarea name="cartData" hidden><%= cartData %></textarea>
+
+                <button
+                    type="submit"
+                    class="w-50 bg-[#101820] hover:bg-[#a47c43] text-white py-3 rounded-xl font-semibold transition">
+                    Confirm Payment
+                </button>
+            </form>
+
+        </div>
+    </main>
+
+     <footer class="bg-[#101820] px-6 py-6 text-center text-white">
+        <p class="font-bold">The <span class="text-[#d8b77a]">Book Store</span></p>
+        <p class="mt-2 text-sm text-white/50">Read. Learn. Grow.</p>
+    </footer>
+
+    <div id="upiLinkData" class="hidden"><%= upiLink %></div>
+
+    <script>
+        const upiLink = document.getElementById('upiLinkData').textContent;
+
+        const qrImage = document.getElementById('upiQr');
+        const qrError = document.getElementById('qrError');
+
+        qrImage.onerror = function () {
+            qrImage.classList.add('hidden');
+            qrError.classList.remove('hidden');
+        };
+
+        qrImage.onload = function () {
+            qrImage.classList.remove('hidden');
+            qrError.classList.add('hidden');
+        };
+
+        qrImage.src =
+            'https://api.qrserver.com/v1/create-qr-code/?size=280x280&data='
+            + encodeURIComponent(upiLink);
+
+        function copyUpi() {
+            const upi = document.getElementById('upiId').textContent.trim();
+
+            navigator.clipboard.writeText(upi)
+                .then(() => alert('UPI ID copied!'))
+                .catch(() => prompt('Copy your UPI ID:', upi));
+        }
+    </script>
+
+
+    <script>
+        document.getElementById('confirmPaymentForm').addEventListener('submit', function () {
+            localStorage.removeItem('cart');
+        });
+    </script>
+</body>
+</html>

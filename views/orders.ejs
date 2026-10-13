@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders | The Book Store</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="min-h-screen bg-[#f6f3ed] text-[#17202a]">
+    <%- include('includes/nav.ejs') %>
+
+    <header class="bg-[#101820] px-6 py-10 text-center text-white">
+        <p class="text-sm font-bold uppercase tracking-[4px] text-[#d8b77a]">Admin Panel</p>
+        <h1 class="mt-2 text-3xl font-bold md:text-4xl">Customer Orders</h1>
+        <p class="mt-2 text-white/60">View every order and its customer, delivery, payment, and item details.</p>
+    </header>
+
+    <main class="mx-auto max-w-6xl space-y-6 px-5 py-10">
+        <% if (orders.length === 0) { %>
+            <section class="rounded-3xl border border-[#e4ddd0] bg-white px-6 py-16 text-center shadow-sm">
+                <p class="text-xl font-semibold">No orders yet</p>
+                <p class="mt-2 text-gray-500">Orders placed by customers will appear here.</p>
+            </section>
+        <% } %>
+
+        <% orders.forEach(order => { %>
+            <article class="overflow-hidden rounded-3xl border border-[#e4ddd0] bg-white shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-[#17202a] px-6 py-5 text-white">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[3px] text-[#d8b77a]">Order</p>
+                        <h2 class="mt-1 break-all text-lg font-bold"><%= order.orderId %></h2>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <p class="text-sm text-white/70">
+                            Placed <%= new Date(order.createdAt).toLocaleString() %>
+                        </p>
+                        <form action="/admin/orders/delete/<%= order._id %>" method="POST"
+                            onsubmit="return confirm('You want to delete this order?');">
+                            <button type="submit"
+                                class="rounded-full border border-red-300/50 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-500 hover:text-white">
+                                Delete Order
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="grid gap-6 p-6 md:grid-cols-2">
+                    <section>
+                        <h3 class="mb-3 font-bold text-[#a47c43]">Customer</h3>
+                        <dl class="space-y-2 text-sm">
+                            <div><dt class="inline font-semibold">Name: </dt><dd class="inline"><%= order.customer.name %></dd></div>
+                            <div><dt class="inline font-semibold">Email: </dt><dd class="inline break-all"><%= order.customer.email %></dd></div>
+                            <div><dt class="inline font-semibold">Phone: </dt><dd class="inline"><%= order.customer.phone %></dd></div>
+                        </dl>
+                    </section>
+
+                    <section>
+                        <h3 class="mb-3 font-bold text-[#a47c43]">Delivery &amp; Payment</h3>
+                        <dl class="space-y-2 text-sm">
+                            <div><dt class="inline font-semibold">Address: </dt><dd class="inline"><%= order.deliveryAddress.address %>, <%= order.deliveryAddress.city %>, <%= order.deliveryAddress.state %> <%= order.deliveryAddress.pincode %></dd></div>
+                            <div><dt class="inline font-semibold">Payment method: </dt><dd class="inline"><%= order.payment %></dd></div>
+                        </dl>
+                    </section>
+                </div>
+
+                <div class="px-6 pb-6">
+                    <h3 class="mb-3 font-bold text-[#a47c43]">Items Ordered</h3>
+                    <div class="overflow-x-auto rounded-xl border border-[#eee9df]">
+                        <table class="w-full min-w-[560px] text-left text-sm">
+                            <thead class="bg-[#f6f3ed]">
+                                <tr>
+                                    <th class="px-4 py-3 font-semibold">Book</th>
+                                    <th class="px-4 py-3 font-semibold">Author</th>
+                                    <th class="px-4 py-3 text-right font-semibold">Price</th>
+                                    <th class="px-4 py-3 text-right font-semibold">Quantity</th>
+                                    <th class="px-4 py-3 text-right font-semibold">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% order.items.forEach(item => { %>
+                                    <tr class="border-t border-[#eee9df]">
+                                        <td class="px-4 py-3"><%= item.title %></td>
+                                        <td class="px-4 py-3"><%= item.author %></td>
+                                        <td class="px-4 py-3 text-right">₹<%= Number(item.price).toFixed(2) %></td>
+                                        <td class="px-4 py-3 text-right"><%= item.quantity %></td>
+                                        <td class="px-4 py-3 text-right">₹<%= Number(item.subtotal).toFixed(2) %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 flex flex-wrap justify-end gap-x-8 gap-y-2 text-sm">
+                        <p><span class="font-semibold">Total items:</span> <%= order.totalItems %></p>
+                        <p class="text-base font-bold">Order total: ₹<%= Number(order.totalAmount).toFixed(2) %></p>
+                    </div>
+                </div>
+            </article>
+        <% }) %>
+    </main>
+</body>
+</html>
