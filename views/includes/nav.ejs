@@ -1,9 +1,110 @@
-<nav class="sticky top-0 z-50 border-b border-white/10 bg-[#101820]/95 px-6 py-4 text-white shadow-xl backdrop-blur-md">
+<nav class="sticky top-0 z-50 border-b border-white/10 bg-[#101820]/95 px-4 py-4 text-white shadow-xl backdrop-blur-md sm:px-6">
 
-    <div class="mx-auto flex max-w-7xl items-center justify-between">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .nav-shell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-brand {
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            white-space: nowrap;
+        }
+
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            border: 1px solid rgba(216, 183, 122, 0.4);
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.02);
+            color: #d8b77a;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 1.2rem;
+            height: 2px;
+            background: currentColor;
+            border-radius: 9999px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .nav-toggle span + span {
+            margin-top: 0.28rem;
+        }
+
+        .nav-toggle.is-open span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .nav-toggle.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.is-open span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .nav-shell {
+                flex-wrap: wrap;
+            }
+
+            .nav-toggle {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+                padding-top: 0.5rem;
+            }
+
+            .nav-links.nav-open {
+                display: flex;
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+
+    <div class="nav-shell mx-auto max-w-7xl">
 
         <a href="/"
-            class="group flex items-center gap-2 text-xl font-bold tracking-wide transition duration-300 hover:text-[#d8b77a]">
+            class="nav-brand group flex items-center gap-2 text-xl font-bold tracking-wide transition duration-300 hover:text-[#d8b77a]">
 
             <span class="text-[#d8b77a] transition duration-300 group-hover:rotate-12">
                 📚
@@ -15,8 +116,13 @@
 
         </a>
 
+        <button type="button" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-        <div class="flex items-center gap-2 md:gap-7">
+        <div id="mainNavLinks" class="nav-links">
 
             <a href="/"
                 class="rounded-full border border-[#d8b77a]/50 px-5 py-2 text-sm font-semibold text-[#d8b77a] transition duration-300 hover:-translate-y-0.5 hover:bg-[#d8b77a] hover:text-[#101820] hover:shadow-lg">
@@ -76,5 +182,20 @@
         </div>
 
     </div>
+
+    <script>
+        (() => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.getElementById('mainNavLinks');
+
+            if (!navToggle || !navLinks) return;
+
+            navToggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('nav-open');
+                navToggle.classList.toggle('is-open', isOpen);
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        })();
+    </script>
 
 </nav>

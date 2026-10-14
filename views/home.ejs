@@ -13,14 +13,14 @@
     <%- include('includes/nav.ejs') %>
 
     <section class="overflow-hidden bg-[#101820] text-white">
-        <div class="mx-auto grid max-w-8xl items-center lg:min-h[250px] lg:grid-cols-2">
+        <div class="mx-auto grid max-w-[1200px] items-center gap-6 lg:min-h-[250px] lg:grid-cols-2">
 
-            <div class="order-2 px-5 py-10 sm:px-10 lg:order-1 lg:px-10 lg:py-8">
+            <div class="order-2 px-5 py-8 sm:px-8 lg:order-1 lg:px-10 lg:py-8">
                 <p class="mb-3 text-sm font-semibold uppercase tracking-[3px] text-[#d8b77a]">
                     Welcome to
                 </p>
 
-                <h1 class="max-w-xl text-3xl font-bold leading-tight sm:text-4xl">
+                <h1 class="max-w-xl text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
                     Stories That
                     <span class="block font-serif italic font-normal text-[#d8b77a]">
                         Stay With You.
@@ -33,14 +33,14 @@
                     kind of reader.
                 </p>
 
-                <div class="mt-3 flex flex-wrap gap-3">
+                <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                     <a href="/books"
-                        class="rounded-full bg-[#d8b77a] px-4 py-2 font-bold text-[#101820] transition hover:bg-[#f0d59e]">
+                        class="inline-flex items-center justify-center rounded-full bg-[#d8b77a] px-4 py-2 font-bold text-[#101820] transition hover:bg-[#f0d59e] sm:w-auto">
                         Explore Collection →
                     </a>
 
                     <a href="/categories"
-                        class="rounded-full border border-white/30 px-4 py-2 font-semibold transition hover:border-[#d8b77a] hover:bg-white/10">
+                        class="inline-flex items-center justify-center rounded-full border border-white/30 px-4 py-2 font-semibold transition hover:border-[#d8b77a] hover:bg-white/10 sm:w-auto">
                         Browse Categories
                     </a>
                 </div>
@@ -52,31 +52,31 @@
                 </div>
             </div>
 
-            <div class="order-1 h-[180px] sm:h-[230px] lg:order-2 lg:h-[330px] sm:px-20 lg:py-10 lg:px-15">
+            <div class="order-1 h-[180px] px-4 sm:h-[230px] sm:px-12 lg:order-2 lg:h-[330px] lg:px-12 lg:py-10">
                 <img src="/uploads/img4.jpg"
                     alt="The Book Store"
-                    class="h-full w-120 rounded-3xl border border-[#e5ddcf] hover:border-[#d8b77a] object-cover">
+                    class="h-full w-full max-w-[560px] rounded-3xl border border-[#e5ddcf] object-cover hover:border-[#d8b77a] lg:ml-auto">
             </div>
 
         </div>
     </section>
 
-    <section class="px-6 py-10 md:px-10 md:py-10">
-        <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-12 lg:items-start">
+    <section class="px-5 py-10 sm:px-6 md:px-10 md:py-10">
+        <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-12 lg:items-start">
 
             <div class="lg:col-span-4">
                 <p class="text-sm font-bold uppercase tracking-[3px] text-[#a47c43]">
                     Explore Our World
                 </p>
 
-                <h2 class="mt-4 text-4xl font-bold leading-tight sm:text-4xl">
+                <h2 class="mt-4 text-3xl font-bold leading-tight sm:text-4xl">
                     Every Reader
                     <span class="font-serif italic font-normal text-[#a47c43]">
                         Has a Story.
                     </span>
                 </h2>
 
-                <p class="mt-5 leading-5 text-gray-600">
+                <p class="mt-5 leading-6 text-gray-600">
                     Explore different worlds, ideas and perspectives through our selected categories.
                 </p>
 
@@ -89,18 +89,18 @@
             <div class="grid gap-3 sm:grid-cols-2 lg:col-span-8">
 
                 <a href="/categories/Self Helps"
-                    class="group rounded-2xl border border-[#e5ddcf] bg-white p-2 transition duration-300 hover:-translate-y-1 hover:border-[#d8b77a] hover:shadow-xl sm:p-4">
-                
+                    class="group rounded-2xl border border-[#e5ddcf] bg-white p-4 transition duration-300 hover:-translate-y-1 hover:border-[#d8b77a] hover:shadow-xl">
+
                     <h3 class="mt-3 text-2xl font-bold">Self Helps</h3>
 
-                    <p class="mt-3 leading-6  text-gray-600">
+                    <p class="mt-3 leading-6 text-gray-600">
                         Self-help books are practical guides designed to help readers improve their mindsets,
                         build better habits, manage relationships, and achieve personal or professional growth.
                     </p>
                 </a>
 
                 <a href="/categories/Magic Systems"
-                    class="group rounded-2xl border border-[#e5ddcf] bg-white p-2 transition duration-300 hover:-translate-y-1 hover:border-[#d8b77a] hover:shadow-xl sm:p-4">
+                    class="group rounded-2xl border border-[#e5ddcf] bg-white p-4 transition duration-300 hover:-translate-y-1 hover:border-[#d8b77a] hover:shadow-xl">
 
                     <h3 class="mt-3 text-2xl font-bold">Magic Systems</h3>
 
@@ -111,32 +111,31 @@
                 </a>
 
                 <a href="/categories/Psychological Thriller"
-                    class="group rounded-2xl border border-[#e5ddcf] bg-white p-2 transition duration-300 hover:-translate-y-1 hover:border-[#d8b77a] hover:shadow-xl sm:col-span-2 sm:p-4">
-            
-                            <div class="flex items-center justify-between gap-4">
-                                <h3 class="text-2xl font-bold">Psychological Thriller</h3>
-                
-                            </div>
+                    class="group rounded-2xl border border-[#e5ddcf] bg-white p-4 transition duration-300 hover:-translate-y-1 hover:border-[#d8b77a] hover:shadow-xl sm:col-span-2">
 
-                            <p class="mt-3 leading-5 text-gray-600">
-                                Psychological thriller books focus on mental games, unreliable narrators, gaslighting,
-                                and intense emotional suspense rather than standard police procedurals or graphic violence.
-                            </p>
+                    <div class="flex items-center justify-between gap-4">
+                        <h3 class="text-2xl font-bold">Psychological Thriller</h3>
+                    </div>
+
+                    <p class="mt-3 leading-6 text-gray-600">
+                        Psychological thriller books focus on mental games, unreliable narrators, gaslighting,
+                        and intense emotional suspense rather than standard police procedurals or graphic violence.
+                    </p>
                 </a>
 
             </div>
         </div>
     </section>
 
-    <section class="bg-white px-6 py-10 md:px-10 md:py-10">
-        <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+    <section class="bg-white px-5 py-10 sm:px-6 md:px-10 md:py-10">
+        <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
 
-            <div class="relative">
+            <div class="relative mx-auto w-full max-w-[420px] lg:mx-0">
                 <img src="/uploads/img1.jpg"
                     alt="About The Book Store"
-                    class="h-[300px] w-90px rounded-2xl object-cover shadow-lg sm:h-[400px]">
+                    class="h-[280px] w-full rounded-2xl object-cover shadow-lg sm:h-[360px] lg:h-[400px]">
 
-                <div class="absolute -bottom-6 right-6 max-w-xs rounded-xl bg-[#101820] p-4 text-white shadow-xl sm:right-15">
+                <div class="absolute -bottom-5 right-3 max-w-[210px] rounded-xl bg-[#101820] p-4 text-white shadow-xl sm:right-6">
                     <p class="text-xs uppercase tracking-[1px] text-[#d8b77a]">
                         Our Story
                     </p>
@@ -151,7 +150,7 @@
                     About The Book Store
                 </p>
 
-                <h2 class="mt-4 text-4xl font-bold leading-tight sm:text-4xl">
+                <h2 class="mt-4 text-3xl font-bold leading-tight sm:text-4xl">
                     A Quiet Place
                     <span class="block font-serif italic font-normal text-[#a47c43]">
                         for Great Stories.
@@ -178,23 +177,22 @@
         </div>
     </section>
 
-    <section class="px-6 py-10 md:px-10 md:py-10">
+    <section class="px-5 py-10 sm:px-6 md:px-10 md:py-10">
         <div class="mx-auto max-w-7xl">
 
-            <div class="mb-6 max-w-1xl">
+            <div class="mb-6 max-w-xl">
                 <p class="text-sm font-bold uppercase tracking-[2px] text-[#a47c43]">
                     The Collection
                 </p>
 
-                <h2 class="mt-4 text-4xl font-bold sm:text-3xl">
+                <h2 class="mt-4 text-3xl font-bold sm:text-4xl">
                     Why Readers Love Us
                 </h2>
             </div>
 
             <div class="grid gap-3 md:grid-cols-3">
 
-                <div class=" bg-white p-2  rounded-2xl shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-6  ">
-
+                <div class="rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-6">
                     <h3 class="mt-2 text-xl font-bold">Carefully Selected</h3>
 
                     <p class="mt-4 leading-6 text-gray-600">
@@ -203,8 +201,7 @@
                     </p>
                 </div>
 
-                <div class="bg-white p-2 rounded-2xl shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-6">
-        
+                <div class="rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-6">
                     <h3 class="mt-2 text-xl font-bold">Learn &amp; Grow</h3>
 
                     <p class="mt-4 leading-6 text-gray-600">
@@ -213,8 +210,7 @@
                     </p>
                 </div>
 
-                <div class="border-t-2 border-[white] bg-white p-2 rounded-2xl shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-6">
-
+                <div class="rounded-2xl border-t-2 border-white bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-6">
                     <h3 class="mt-2 text-xl font-bold">Made for Readers</h3>
 
                     <p class="mt-4 leading-6 text-gray-600">
@@ -228,15 +224,15 @@
         </div>
     </section>
 
-    <section class="px-5 pb-8 md:px-8 md:pb-8">
+    <section class="px-5 pb-8 sm:px-6 md:px-8 md:pb-8">
         <div class="mx-auto grid max-w-7xl overflow-hidden rounded-3xl bg-[#101820] text-white md:grid-cols-5">
 
-            <div class="px-5 py-10 sm:px-10 md:col-span-3 md:py-10">
+            <div class="px-5 py-8 sm:px-8 md:col-span-3 md:py-10">
                 <p class="text-xs font-bold uppercase tracking-[3px] text-[#d8b77a]">
                     Your Next Chapter Awaits
                 </p>
 
-                <h2 class="mt-4 text-3xl font-bold leading-tight sm:text-3xl">
+                <h2 class="mt-4 text-2xl font-bold leading-tight sm:text-3xl">
                     Ready to Find Your Next Favourite Book?
                 </h2>
 
@@ -251,21 +247,21 @@
                 </a>
             </div>
 
-            <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-[#1b2932] p-8 md:col-span-2 md:min-h-full">
-                <div class="absolute h-52 w-52 rounded-full border border-[#d8b77a]/20"></div>
-                <div class="absolute h-40 w-40 rounded-full border border-[#d8b77a]/30"></div>
+            <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-[#1b2932] p-6 md:col-span-2 md:min-h-full md:p-8">
+                <div class="absolute h-40 w-40 rounded-full border border-[#d8b77a]/20 sm:h-52 sm:w-52"></div>
+                <div class="absolute h-28 w-28 rounded-full border border-[#d8b77a]/30 sm:h-40 sm:w-40"></div>
 
                 <div class="relative text-center">
-                    <span class="font-serif text-6xl italic text-[#d8b77a]">Read.</span>
-                    <span class="mt-2 block font-serif text-4xl italic text-white">Learn.</span>
-                    <span class="mt-2 block font-serif text-5xl italic text-[#d8b77a]">Grow.</span>
+                    <span class="font-serif text-5xl italic text-[#d8b77a] sm:text-6xl">Read.</span>
+                    <span class="mt-2 block font-serif text-3xl italic text-white sm:text-4xl">Learn.</span>
+                    <span class="mt-2 block font-serif text-4xl italic text-[#d8b77a] sm:text-5xl">Grow.</span>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <footer class="bg-[#101820] px-6 py-5 text-white md:px-10">
+    <footer class="bg-[#101820] px-5 py-6 text-white sm:px-6 md:px-10">
         <div class="mx-auto grid max-w-7xl gap-8 text-center md:grid-cols-2 md:items-center md:text-left">
 
             <div>
@@ -273,7 +269,7 @@
                     The <span class="font-serif italic text-[#d8b77a]">Book Store</span>
                 </h3>
 
-                <p class="mt-4 max-w-md text-lg leading-6 text-white/45">
+                <p class="mt-4 max-w-md text-base leading-6 text-white/45 sm:text-lg">
                     A place where stories come alive, knowledge grows
                     and every reader can find something special.
                 </p>
@@ -284,7 +280,7 @@
                     Read. Learn. Grow.
                 </p>
 
-                <p class="mt-2 text-lg text-white/45">
+                <p class="mt-2 text-base text-white/45 sm:text-lg">
                     © The Book Store
                 </p>
             </div>
